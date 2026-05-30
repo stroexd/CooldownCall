@@ -9,7 +9,7 @@
 ## X-Category: Raid Frames & Tools
 ## X-License: MIT
 ## X-Website: https://github.com/stroexd/CooldownCall
-## X-Curse-Project-ID:
+## X-Curse-Project-ID: 1558830
 
 embeds.xml
 
