@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <!-- Bronze ring -->
+    <linearGradient id="bronze" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#5e3f1a"/>
+      <stop offset="20%"  stop-color="#a37428"/>
+      <stop offset="42%"  stop-color="#f4d27a"/>
+      <stop offset="55%"  stop-color="#fff1b8"/>
+      <stop offset="68%"  stop-color="#d8a64a"/>
+      <stop offset="100%" stop-color="#3a2510"/>
+    </linearGradient>
+
+    <radialGradient id="rivet" cx="35%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#fff1b8"/>
+      <stop offset="50%" stop-color="#a37428"/>
+      <stop offset="100%" stop-color="#1c1206"/>
+    </radialGradient>
+
+    <!-- Inner disc: dark-mode charcoal -->
+    <radialGradient id="discBg" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#34343a"/>
+      <stop offset="60%" stop-color="#23232a"/>
+      <stop offset="100%" stop-color="#15151b"/>
+    </radialGradient>
+
+    <radialGradient id="glowBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8fc0ff" stop-opacity="0.45"/>
+      <stop offset="65%" stop-color="#2a5aa0" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.4" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Bronze outer ring -->
+  <circle cx="128" cy="128" r="124" fill="url(#bronze)"/>
+  <circle cx="128" cy="128" r="124" fill="none" stroke="#1c1206" stroke-width="2"/>
+  <circle cx="128" cy="128" r="110" fill="none" stroke="#1c1206" stroke-width="2"/>
+  <circle cx="128" cy="128" r="110" fill="none" stroke="#fff1b8" stroke-width="0.8" opacity="0.45"/>
+
+  <!-- Compass rivets -->
+  <circle cx="128" cy="14"  r="6" fill="url(#rivet)" stroke="#1c1206" stroke-width="1"/>
+  <circle cx="242" cy="128" r="6" fill="url(#rivet)" stroke="#1c1206" stroke-width="1"/>
+  <circle cx="128" cy="242" r="6" fill="url(#rivet)" stroke="#1c1206" stroke-width="1"/>
+  <circle cx="14"  cy="128" r="6" fill="url(#rivet)" stroke="#1c1206" stroke-width="1"/>
+
+  <!-- Inner disc -->
+  <circle cx="128" cy="128" r="108" fill="url(#discBg)"/>
+  <circle cx="128" cy="128" r="108" fill="url(#glowBg)"/>
+
+  <clipPath id="discClip">
+    <circle cx="128" cy="128" r="108"/>
+  </clipPath>
+
+  <g clip-path="url(#discClip)">
+    <!-- Cooldown sweep: a clock dial with a highlighted wedge -->
+    <g transform="translate(128,122)">
+      <circle r="62" fill="none" stroke="#3c3c46" stroke-width="6"/>
+      <!-- swept wedge (the cooldown filling up) -->
+      <path d="M 0 0 L 0 -62 A 62 62 0 0 1 53.7 31 Z" fill="#7fa8ff" opacity="0.30"/>
+      <!-- tick marks -->
+      <g stroke="#9fb6d4" stroke-width="3" opacity="0.7">
+        <line x1="0" y1="-62" x2="0" y2="-52"/>
+        <line x1="62" y1="0" x2="52" y2="0"/>
+        <line x1="0" y1="62" x2="0" y2="52"/>
+        <line x1="-62" y1="0" x2="-52" y2="0"/>
+      </g>
+      <!-- hand -->
+      <g filter="url(#glow)">
+        <line x1="0" y1="0" x2="40" y2="-30" stroke="#bfe0ff" stroke-width="5" stroke-linecap="round"/>
+        <circle r="6" fill="#eaf3ff"/>
+      </g>
+    </g>
+
+    <!-- Whisper / speech bubble (the "call") -->
+    <g transform="translate(170,168)" filter="url(#glow)">
+      <path d="M -34 -22 Q -42 -22 -42 -12 L -42 8 Q -42 18 -32 18 L -8 18 L 2 30 L 0 18 L 30 18 Q 40 18 40 8 L 40 -12 Q 40 -22 30 -22 Z"
+            fill="#1d2740" stroke="#7fa8ff" stroke-width="3"/>
+      <g fill="#bfe0ff">
+        <circle cx="-16" cy="-2" r="4"/>
+        <circle cx="0" cy="-2" r="4"/>
+        <circle cx="16" cy="-2" r="4"/>
+      </g>
+    </g>
+  </g>
+</svg>

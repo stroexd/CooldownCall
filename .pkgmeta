@@ -1,0 +1,22 @@
+package-as: CooldownCall
+
+externals:
+  Libs/LibStub: https://repos.curseforge.com/wow/libstub/trunk
+  Libs/CallbackHandler-1.0: https://repos.curseforge.com/wow/callbackhandler/trunk/CallbackHandler-1.0
+  Libs/AceAddon-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceAddon-3.0
+  Libs/AceEvent-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceEvent-3.0
+  Libs/AceConsole-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceConsole-3.0
+  Libs/AceDB-3.0: https://repos.curseforge.com/wow/ace3/trunk/AceDB-3.0
+  Libs/LibDataBroker-1.1: https://repos.curseforge.com/wow/libdatabroker-1-1/trunk
+  Libs/LibDBIcon-1.0: https://repos.curseforge.com/wow/libdbicon-1-0/trunk/LibDBIcon-1.0
+
+ignore:
+  - .luacheckrc
+  - stylua.toml
+  - .styluaignore
+  - dev-link.sh
+  - CURSEFORGE.md
+  - Media/icon.svg
+  - Media/build-icons.sh
+
+enable-nolib-creation: no
