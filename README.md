@@ -12,9 +12,10 @@ In a raid you often need a cooldown from someone else *now* — Power Infusion o
 - Only **cooldowns that caster's class actually has** are offered (or type any custom spell).
 - Each call becomes a **clickable on-screen bar** with the spell icon, the cooldown name, and the caster's name in their **class colour**.
 - Bars are **sorted by role** (combat rez, defensives, mana, throughput, …), **resizable**, and movable.
-- Clicking a bar sends a configurable **whisper** to the assigned player.
+- Clicking a bar sends a configurable **whisper** (with a clickable spell link) to the assigned player.
+- Once the caster uses the spell, the bar shows the **remaining cooldown** and greys out until it's back up.
 
-Pure Lua addon — no companion app, no setup beyond installing it.
+Standalone, lightweight, pure Lua — **not** a WeakAura, not bolted onto another addon. No companion app, no setup beyond installing it.
 
 ## Requirements
 

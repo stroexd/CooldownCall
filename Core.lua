@@ -3,7 +3,13 @@ local ADDON_NAME, ns = ...
 local CooldownCall = LibStub("AceAddon-3.0"):NewAddon(ADDON_NAME, "AceConsole-3.0", "AceEvent-3.0")
 ns.Addon = CooldownCall
 
-local DEFAULT_MESSAGE = "{spell} bitte!"
+-- Default whisper message, localized by client language (German vs. English).
+local function defaultMessage()
+  if GetLocale() == "deDE" then
+    return "{spell} bitte!"
+  end
+  return "Use {spell}!"
+end
 
 local defaults = {
   profile = {
@@ -37,7 +43,8 @@ function CooldownCall:AddCall(data)
     spellID = data.spellID,
     name = data.name or "?",
     role = data.role or "Utility",
-    message = DEFAULT_MESSAGE,
+    cd = data.cd, -- known cooldown in seconds (nil = no timer)
+    message = defaultMessage(),
     enabled = true,
   }
   table.insert(self.db.profile.calls, call)
@@ -106,6 +113,7 @@ function CooldownCall:OnInitialize()
   self.db = LibStub("AceDB-3.0"):New("CooldownCallDB", defaults, true)
 
   ns.Caller:Initialize(self)
+  ns.CD:Initialize(self)
   ns.Options:Initialize(self)
   ns.Bars:Initialize(self)
   self:SetupMinimap()

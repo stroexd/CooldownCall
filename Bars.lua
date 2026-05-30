@@ -82,6 +82,10 @@ local function acquireBar(index)
   bar.icon = bar:CreateTexture(nil, "ARTWORK")
   bar.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92) -- trim the default icon border
 
+  -- Cooldown countdown overlay, drawn on top of the icon.
+  bar.cdText = bar:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+  bar.cdText:SetTextColor(1, 0.82, 0.2)
+
   bar.spellName = bar:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
   bar.spellName:SetJustifyH("LEFT")
 
@@ -105,6 +109,27 @@ local function acquireBar(index)
     else
       addon:Print(who) -- reason string
     end
+  end)
+
+  -- Show the assigned caster's cooldown counting down (combat-log driven).
+  bar.elapsed = 0
+  bar:SetScript("OnUpdate", function(self, e)
+    self.elapsed = self.elapsed + e
+    if self.elapsed < 0.1 then
+      return
+    end
+    self.elapsed = 0
+    local remaining = self.call and ns.CD:Remaining(self.call) or 0
+    if remaining > 0 then
+      self.cdText:SetText(ns.CD:FormatTime(remaining))
+      self.icon:SetDesaturated(true)
+      self:SetAlpha(0.55)
+    elseif self.onCooldown ~= false then
+      self.cdText:SetText("")
+      self.icon:SetDesaturated(false)
+      self:SetAlpha(1)
+    end
+    self.onCooldown = remaining > 0
   end)
 
   bars[index] = bar
@@ -151,6 +176,10 @@ function Bars:Refresh()
     bar.icon:SetPoint("LEFT", inset, 0)
     bar.icon:SetSize(h - inset * 2, h - inset * 2)
     bar.icon:SetTexture(ns.Spells:Icon(call.spellID) or "Interface\\Icons\\INV_Misc_QuestionMark")
+
+    bar.cdText:ClearAllPoints()
+    bar.cdText:SetPoint("CENTER", bar.icon, "CENTER", 0, 0)
+    bar.onCooldown = nil -- let OnUpdate re-evaluate the cooldown visual
 
     -- caster colour drives this bar's accent
     local accent = ns.Theme:ClassColor(call.class)

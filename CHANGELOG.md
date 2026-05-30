@@ -18,6 +18,12 @@ First release.
   class colour. Sorted by role, resizable (width/height), movable, lockable.
 - Clicking a bar (or the *Call* button) sends a configurable **whisper** to the
   assigned caster. Tokens: `{spell}`, `{caster}`, `{target}`. Per-call throttle.
+- `{spell}` is sent as a **clickable spell link**; the default message is
+  **localized** (German on `deDE` clients, English otherwise).
+- **Cooldown countdown**: when the assigned caster casts a tracked spell, the
+  bar shows the remaining cooldown (from a hand-curated TBC duration table) and
+  desaturates the icon until it is ready again. Combat-log driven, since another
+  player's cooldowns can't be queried directly.
 - **Dark / light theme**: dark = charcoal background with class-colour accent
   and names; light = class-colour background with charcoal border and text.
 - Minimap button (LibDBIcon): left-click opens options, right-click toggles

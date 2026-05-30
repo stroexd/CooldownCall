@@ -17,8 +17,9 @@ read_globals = {
   -- Blizzard API used by the addon
   "UnitName", "UnitClass", "UnitExists", "UnitIsPlayer", "UnitGroupRolesAssigned",
   "IsInRaid", "IsInGroup", "GetNumGroupMembers",
-  "GetSpellInfo", "GetSpellTexture",
-  "GetTime", "SendChatMessage",
+  "GetSpellInfo", "GetSpellTexture", "GetSpellLink",
+  "GetTime", "SendChatMessage", "GetLocale",
+  "CombatLogGetCurrentEventInfo",
   "RAID_CLASS_COLORS",
 
   -- UI

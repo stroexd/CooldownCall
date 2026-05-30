@@ -17,6 +17,7 @@ Spells.lua
 Theme.lua
 Roster.lua
 Caller.lua
+Cooldowns.lua
 Bars.lua
 Options.lua
 Core.lua

@@ -397,6 +397,7 @@ function Options:PopulateSpells(dd)
         spellID = s.id,
         name = ns.Spells:Name(s.id, s.en),
         role = s.role,
+        cd = s.cd,
         class = class,
       })
     end
@@ -420,7 +421,7 @@ function Options:DoAdd()
   end
 
   local custom = self.customEdit:GetText():trim()
-  local spellID, name, role
+  local spellID, name, role, cd
   if custom ~= "" then
     local id = tonumber(custom)
     if id then
@@ -438,6 +439,7 @@ function Options:DoAdd()
     spellID = self.addSpell.spellID
     name = self.addSpell.name
     role = self.addSpell.role
+    cd = self.addSpell.cd
   else
     addon:Print("pick a cooldown or type a custom one")
     return
@@ -449,6 +451,7 @@ function Options:DoAdd()
     spellID = spellID,
     name = name,
     role = role,
+    cd = cd,
   })
   self.customEdit:SetText("")
   self.spellDD:SetValue(nil)

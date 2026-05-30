@@ -16,16 +16,39 @@ function Caller:Initialize(parent)
   addon = parent
 end
 
+-- The {spell} token becomes a clickable in-game spell link when we know the
+-- spell id; otherwise it falls back to the plain (localized) spell name.
+local function spellToken(call)
+  if call.spellID then
+    local link = GetSpellLink(call.spellID)
+    if link and link ~= "" then
+      return link
+    end
+  end
+  return call.name or "?"
+end
+
 -- Replace {spell}, {caster}, {target} tokens in the message template.
+-- Function replacements are used so link text containing magic characters
+-- (|, [, ]) is inserted verbatim.
 function Caller:Format(call)
   local target = ""
   if UnitExists("target") and UnitIsPlayer("target") then
     target = UnitName("target") or ""
   end
+  local spell = spellToken(call)
+  local caster = shortName(call.caster) or ""
+
   local msg = call.message or "{spell}!"
-  msg = msg:gsub("{spell}", call.name or "?")
-  msg = msg:gsub("{caster}", shortName(call.caster) or "")
-  msg = msg:gsub("{target}", target)
+  msg = msg:gsub("{spell}", function()
+    return spell
+  end)
+  msg = msg:gsub("{caster}", function()
+    return caster
+  end)
+  msg = msg:gsub("{target}", function()
+    return target
+  end)
   return (msg:gsub("%s+", " "):gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
