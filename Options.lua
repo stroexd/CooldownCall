@@ -131,6 +131,9 @@ local function makeDropdown(parent, w, placeholder)
 
   function dd:SetItems(items)
     self.items = items
+    -- Items are (re)created on open, after the last ApplyTheme pass, so colour
+    -- each button here or it shows an unthemed white backdrop until hovered.
+    local t = theme()
     for _, b in ipairs(self.itemButtons) do
       b:Hide()
     end
@@ -144,11 +147,17 @@ local function makeDropdown(parent, w, placeholder)
         ib.label:SetJustifyH("LEFT")
         self.itemButtons[i] = ib
       end
+      ib._bg = t.btnBg
+      ib._hover = t.btnHover
+      ib:SetBackdropColor(unpack(t.btnBg))
+      ib:SetBackdropBorderColor(unpack(t.btnBorder))
       ib:ClearAllPoints()
       ib:SetPoint("TOPLEFT", 2, y)
       ib.label:SetText(item.text)
       if item.color then
         ib.label:SetTextColor(item.color[1], item.color[2], item.color[3])
+      else
+        ib.label:SetTextColor(unpack(t.text))
       end
       ib:SetScript("OnClick", function()
         dd:SetValue(item.text)
