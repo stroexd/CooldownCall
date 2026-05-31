@@ -145,9 +145,11 @@ function Bars:Refresh()
     return
   end
 
+  -- Only show bars for calls whose assigned caster is currently in the group;
+  -- they reappear automatically when that player rejoins (GROUP_ROSTER_UPDATE).
   local list = {}
   for _, call in ipairs(addon.db.profile.calls) do
-    if call.enabled then
+    if call.enabled and ns.Roster:InGroup(call.caster) then
       table.insert(list, call)
     end
   end

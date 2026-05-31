@@ -56,6 +56,23 @@ function Roster:Members()
   return out
 end
 
+-- Is this (possibly realm-suffixed) name currently in your group/raid? When
+-- solo, only the player counts. Used to keep saved calls inert unless their
+-- assigned caster is actually present, so they can't be used to whisper
+-- arbitrary players later.
+function Roster:InGroup(name)
+  if not name then
+    return false
+  end
+  local short = stripRealm(name)
+  for _, m in ipairs(self:Members()) do
+    if m.name == name or stripRealm(m.name) == short then
+      return true
+    end
+  end
+  return false
+end
+
 -- Best-effort class lookup for a (possibly realm-suffixed) name currently in
 -- the group. Returns the class file token or nil.
 function Roster:ClassOf(name)

@@ -547,7 +547,9 @@ function Options:Refresh()
       end
     end)
 
-    if call.enabled then
+    -- Saved calls are listed even when the caster is away (so you can manage
+    -- them), but the Call button only works when they are in your group.
+    if call.enabled and ns.Roster:InGroup(call.caster) then
       row.callBtn:Enable()
     else
       row.callBtn:Disable()
@@ -654,7 +656,12 @@ function Options:ApplyTheme()
       local dim = row.call and not row.call.enabled
       row.label:SetTextColor(unpack(dim and t.dim or t.text))
       if row.call then
-        row.casterFS:SetTextColor(unpack(ns.Theme:ClassColor(row.call.class)))
+        -- Class colour when present in the group, dimmed when away.
+        if ns.Roster:InGroup(row.call.caster) then
+          row.casterFS:SetTextColor(unpack(ns.Theme:ClassColor(row.call.class)))
+        else
+          row.casterFS:SetTextColor(unpack(t.dim))
+        end
       end
     end
   end

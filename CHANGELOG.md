@@ -5,6 +5,17 @@ All notable changes to **CooldownCall** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-05-31
+
+### Fixed
+- A call can now only whisper its assigned player while that player is
+  **currently in your group/raid**. Saved calls still persist across sessions,
+  but they are inert otherwise, so a stored call can no longer be used to
+  whisper an arbitrary player later. Bars hide when the caster leaves and
+  reappear when they rejoin; in the options window an absent caster is dimmed
+  and their *Call* button is disabled. The options window also refreshes live
+  on group changes.
+
 ## [0.2.0] - 2026-05-31
 
 ### Changed
@@ -47,6 +58,7 @@ First release.
   `lock`/`unlock`, `minimap`, `status`.
 - Per-character settings via AceDB.
 
+[0.2.1]: https://github.com/stroexd/CooldownCall/releases/tag/v0.2.1
 [0.2.0]: https://github.com/stroexd/CooldownCall/releases/tag/v0.2.0
 [0.1.1]: https://github.com/stroexd/CooldownCall/releases/tag/v0.1.1
 [0.1.0]: https://github.com/stroexd/CooldownCall/releases/tag/v0.1.0

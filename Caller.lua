@@ -67,6 +67,13 @@ function Caller:Send(call)
     return false, ("no player assigned to %s"):format(call.name or "?")
   end
 
+  -- Only ever whisper someone who is currently in your group/raid. Saved calls
+  -- stay on disk but are inert otherwise, so a stored call can't be used to
+  -- whisper an arbitrary player later.
+  if not ns.Roster:InGroup(caster) then
+    return false, ("%s is not in your group"):format(shortName(caster) or caster)
+  end
+
   local throttle = addon.db.profile.throttle or 0
   if throttle > 0 then
     local k = caster .. "/" .. (call.name or "?")

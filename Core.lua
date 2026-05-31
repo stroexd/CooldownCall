@@ -126,13 +126,16 @@ end
 function CooldownCall:OnEnable()
   self:RefreshNames()
   ns.Bars:Refresh()
-  -- Rebuild bars when the group changes (caster availability / colours).
-  self:RegisterEvent("GROUP_ROSTER_UPDATE", function()
+  -- Rebuild bars when the group changes (caster availability / colours), and
+  -- refresh the options window if it is open so Call buttons enable/disable.
+  local function onRosterChange()
     ns.Bars:Refresh()
-  end)
-  self:RegisterEvent("PLAYER_ENTERING_WORLD", function()
-    ns.Bars:Refresh()
-  end)
+    if ns.Options.frame and ns.Options.frame:IsShown() then
+      ns.Options:Refresh()
+    end
+  end
+  self:RegisterEvent("GROUP_ROSTER_UPDATE", onRosterChange)
+  self:RegisterEvent("PLAYER_ENTERING_WORLD", onRosterChange)
   self:Print(("ready. %d calls set up. /cc opens the options."):format(#self.db.profile.calls))
 end
 
