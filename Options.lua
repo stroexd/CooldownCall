@@ -658,6 +658,8 @@ function Options:ApplyTheme()
       end
     end
   end
+
+  ns.Theme:ApplyFontToFrame(self.frame)
 end
 
 ------------------------------------------------------------

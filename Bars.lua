@@ -206,6 +206,8 @@ function Bars:Refresh()
   end
 
   anchor:SetHeight(math.max(1, #list * (addon.db.profile.bar.height + GAP)))
+
+  ns.Theme:ApplyFontToFrame(anchor)
 end
 
 ------------------------------------------------------------

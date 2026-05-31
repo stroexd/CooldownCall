@@ -3,7 +3,7 @@
 ## Notes: One-click whisper asking an assigned raid member to cast a cooldown (Power Infusion, Innervate, BoP, ...).
 ## Notes-deDE: Fordert per Klick einen zugewiesenen Mitspieler auf, einen Cooldown zu casten (Machtinfusion, Eingebung, Handauflegen, ...).
 ## Author: Stroe-Spineshatter
-## Version: 0.1.1
+## Version: 0.2.0
 ## SavedVariables: CooldownCallDB
 ## X-Flavor: TBC
 ## X-Category: Raid Frames & Tools
